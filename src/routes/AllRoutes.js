@@ -1,5 +1,5 @@
 import { Routes, Route } from "react-router-dom";
-import { LoginPage, RegisterPage, CartPage, DashboardPage, HomePage, ProductListPage, PageNotFound } from "../pages";
+import { LoginPage, RegisterPage, CartPage, DashboardPage, HomePage, ProductListPage, PageNotFound, ProductDetail } from "../pages";
 
 export const AllRoutes = () => {
     return (
@@ -11,6 +11,7 @@ export const AllRoutes = () => {
                 <Route path="cart" element={<CartPage />} />
                 <Route path="dashboard" element={<DashboardPage />} />
                 <Route path="products" element={<ProductListPage />} />
+                <Route path="products/:id" element={<ProductDetail />} />
                 <Route path="*" element={<PageNotFound />} />
             </Routes>
         </>

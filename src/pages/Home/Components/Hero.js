@@ -14,7 +14,7 @@ export const Hero = () => {
                     </Link>
                 </div>
                 <div className="hidden lg:mt-0 lg:col-span-5 lg:flex">
-                    <img src={hero} className="rounded-lg" />
+                    <img src={hero} className="rounded-lg" alt="hero" />
                 </div>
             </div>
         </section>

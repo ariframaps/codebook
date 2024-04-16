@@ -680,10 +680,6 @@ video {
   margin-top: 1.25rem;
 }
 
-.mb-20 {
-  margin-bottom: 5rem;
-}
-
 .block {
   display: block;
 }
@@ -730,10 +726,6 @@ video {
 
 .min-h-section {
   min-height: 45rem;
-}
-
-.min-h-96 {
-  min-height: 24rem;
 }
 
 .w-10 {
@@ -1020,6 +1012,10 @@ video {
   padding-bottom: 2rem;
 }
 
+.pb-20 {
+  padding-bottom: 5rem;
+}
+
 .pb-5 {
   padding-bottom: 1.25rem;
 }
@@ -1034,10 +1030,6 @@ video {
 
 .ps-5 {
   padding-inline-start: 1.25rem;
-}
-
-.pb-20 {
-  padding-bottom: 5rem;
 }
 
 .text-center {
@@ -1559,10 +1551,6 @@ body {
 
   .lg\:col-span-7 {
     grid-column: span 7 / span 7;
-  }
-
-  .lg\:col-span-6 {
-    grid-column: span 6 / span 6;
   }
 
   .lg\:mb-16 {

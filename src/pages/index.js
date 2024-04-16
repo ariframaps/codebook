@@ -17,4 +17,7 @@ import { ProductListPage } from './Products/ProductListPage'
 // page not found
 import { PageNotFound } from './PageNotFound'
 
-export { LoginPage, RegisterPage, CartPage, DashboardPage, HomePage, ProductListPage, PageNotFound }
+// product detail
+import { ProductDetail } from './ProductDetail'
+
+export { LoginPage, RegisterPage, CartPage, DashboardPage, HomePage, ProductListPage, PageNotFound, ProductDetail }
