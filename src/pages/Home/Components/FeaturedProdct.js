@@ -1,6 +1,18 @@
+import { useEffect, useState } from "react"
 import { ProductCard } from "../../../components"
 
 export const FeaturedProdct = () => {
+    const [products, setProducts] = useState([])
+
+    useEffect(() => {
+        const fetchProducts = async () => {
+            const response = await fetch('http://localhost:8000/featured_products')
+            const result = await response.json()
+            setProducts(result)
+        }
+        fetchProducts()
+    }, [])
+
     return (
         <section className="bg-white dark:bg-gray-900 min-h-section">
             <div className="py-8 px-4 mx-auto max-w-screen-xl lg:py-16 lg:px-6 ">
@@ -9,9 +21,9 @@ export const FeaturedProdct = () => {
                     <p className="font-light text-gray-500 lg:mb-16 sm:text-xl dark:text-gray-400">Best selling collection of ebook on codebook this year with good reviews</p>
                 </div>
                 <div className="grid gap-8 mb-6 lg:mb-16 md:grid-cols-3">
-                    <ProductCard />
-                    <ProductCard />
-                    <ProductCard />
+                    {products.map(product => (
+                        <ProductCard key={product.id} product={product} />
+                    ))}
                 </div>
             </div>
         </section>
