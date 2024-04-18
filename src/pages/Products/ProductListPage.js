@@ -17,7 +17,7 @@ export const ProductListPage = () => {
         <main>
             <div className=" max-w-screen-xl mx-auto p-4">
                 <div className="flex justify-between my-6 text-2xl">
-                    <span>All eBooks(10)</span>
+                    <span>All eBooks({products.length})</span>
                     <button>Filter <i class="bi bi-sliders2 p-1"></i></button>
                 </div>
                 <div className="grid grid-cols-3 gap-y-8 justify-items-center my-6">
