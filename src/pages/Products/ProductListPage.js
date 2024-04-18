@@ -18,11 +18,11 @@ export const ProductListPage = () => {
             <div className=" max-w-screen-xl mx-auto p-4">
                 <div className="flex justify-between my-6 text-2xl">
                     <span>All eBooks({products.length})</span>
-                    <button>Filter <i class="bi bi-sliders2 p-1"></i></button>
+                    <button>Filter <i className="bi bi-sliders2 p-1"></i></button>
                 </div>
-                <div className="grid grid-cols-3 gap-y-8 justify-items-center my-6">
+                <div className="grid md:grid-cols-2 lg:grid-cols-3 md:gap-12 md:space-y-0 gap-y-8 justify-items-center my-6">
                     {products.map(product => (
-                        <ProductCard product={product} />
+                        <ProductCard product={product} key={product.id} />
                     ))}
                 </div>
             </div>

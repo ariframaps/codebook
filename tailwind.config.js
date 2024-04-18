@@ -10,7 +10,8 @@ module.exports = {
       },
       minHeight: {
         'half': '50rem',
-        'section': '45rem'
+        'section': '45rem',
+        'small': '30rem'
       }
     },
     fontFamily: {
