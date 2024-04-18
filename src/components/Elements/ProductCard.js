@@ -21,10 +21,10 @@ export const ProductCard = ({ product }) => {
         <div className="w-full flex flex-col justify-between max-w-sm relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             <span className="absolute top-4 left-4 bg-orange-500 px-3 py-1.5 rounded text-white">Best seller</span>
             <div>
-                <Link to={`/product?id=${id}`}>
+                <Link to={`/product/${id}`}>
                     <div style={imgStyle(poster)} className="rounded-t-lg"></div>
                 </Link>
-                <Link to={`/product?id=${id}`} className="px-5 mt-3 block">
+                <Link to={`/product/${id}`} className="px-5 mt-3 block">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{name}</h5>
                 </Link>
             </div>
