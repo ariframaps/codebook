@@ -50,6 +50,15 @@ export const FilterProvider = ({ children }) => {
         })
     }
 
+    const priceDispatch = (value) => {
+        dispatch({
+            type: 'PRICE_SORT',
+            payload: {
+                priceFilter: value
+            }
+        })
+    }
+
     function bestSeller(products) {
         return state.bestSellerFilter ? products.filter((product) => product.best_seller === true) : products;
     }
@@ -73,7 +82,18 @@ export const FilterProvider = ({ children }) => {
         }
     }
 
-    const filteredProductsList = rating(inStock(bestSeller(state.productsList)))
+    function price(products) {
+        switch (state.priceFilter) {
+            case 'lowToHigh':
+                return products.sort((a, b) => a.price - b.price);
+            case 'highToLow':
+                return products.sort((a, b) => b.price - a.price);
+            default:
+                return products
+        }
+    }
+
+    const filteredProductsList = price(rating(inStock(bestSeller(state.productsList))))
 
     const value = {
         state,
@@ -81,7 +101,8 @@ export const FilterProvider = ({ children }) => {
         initialProductsList,
         bestSellerDispatch,
         inStockDispatch,
-        ratingDispatch
+        ratingDispatch,
+        priceDispatch
     }
 
     return (

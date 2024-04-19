@@ -5,7 +5,7 @@ export const filterReducer = (state, action) => {
         case "PRODUCTS_LIST":
             return { ...state, productsList: payload.productsList };
         case "PRICE_SORT":
-            return
+            return { ...state, priceFilter: payload.priceFilter }
         case "RATING_FILTER":
             return { ...state, ratingFilter: payload.ratingFilter }
         case "BEST_SELLER_ONLY":

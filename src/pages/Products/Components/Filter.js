@@ -4,11 +4,12 @@ import { useFilter } from "../../../context/filterContext"
 export const Filter = ({ setShowFilter }) => {
     const [priceFilter, setPriceFilter] = useState()
 
-    const { state, bestSellerDispatch, inStockDispatch, ratingDispatch } = useFilter()
+    const { state, bestSellerDispatch, inStockDispatch, ratingDispatch, priceDispatch } = useFilter()
 
     function handlePriceFilter(e) {
-        setPriceFilter(e.target.value);
-        console.log(e.target.value)
+        priceDispatch(e.target.value)
+        // setPriceFilter(e.target.value);
+        // console.log(e.target.value)
     }
 
     function handleRatingFilter(e) {
@@ -40,11 +41,11 @@ export const Filter = ({ setShowFilter }) => {
                 <div className="text-lg">
                     <span className="font-semibold text-lg">Sort by</span>
                     <div>
-                        <input onChange={handlePriceFilter} value='lowToHigh' type="radio" name="price" id="price_lowToHigh" className="me-3 w-4 h-4" />
+                        <input onChange={handlePriceFilter} checked={state.priceFilter === 'lowToHigh'} value='lowToHigh' type="radio" name="price" id="price_lowToHigh" className="me-3 w-4 h-4" />
                         <label htmlFor="price_lowToHigh">Price - Low to High</label>
                     </div>
                     <div>
-                        <input onChange={handlePriceFilter} value='highToLow' type="radio" name="price" id="price_highToLow" className="me-3 w-4 h-4" />
+                        <input onChange={handlePriceFilter} checked={state.priceFilter === 'highToLow'} value='highToLow' type="radio" name="price" id="price_highToLow" className="me-3 w-4 h-4" />
                         <label htmlFor="price_highToLow">Price - High to Low</label>
                     </div>
                 </div>
