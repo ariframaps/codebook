@@ -15,7 +15,6 @@ export const ProductDetail = () => {
         }
         fetchProduct()
     }, [id])
-    console.log(product)
 
     return (
         <main className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased mt-16">
