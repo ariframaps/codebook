@@ -3,9 +3,8 @@ import { useFilter } from "../../../context/filterContext"
 
 export const Filter = ({ setShowFilter }) => {
     const [priceFilter, setPriceFilter] = useState()
-    const [ratingFilter, setRatingFilter] = useState()
 
-    const { state, bestSellerDispatch, inStockDispatch } = useFilter()
+    const { state, bestSellerDispatch, inStockDispatch, ratingDispatch } = useFilter()
 
     function handlePriceFilter(e) {
         setPriceFilter(e.target.value);
@@ -13,15 +12,14 @@ export const Filter = ({ setShowFilter }) => {
     }
 
     function handleRatingFilter(e) {
-        setRatingFilter(e.target.value);
-        console.log(e.target.value)
+        ratingDispatch(e.target.value)
     }
 
-    function handleBestsellerFilter(e) {
+    function handleBestsellerFilter() {
         bestSellerDispatch();
     }
 
-    function handeleInstockFilter(e) {
+    function handeleInstockFilter() {
         inStockDispatch();
     }
 
@@ -54,19 +52,19 @@ export const Filter = ({ setShowFilter }) => {
                 <div className="text-lg">
                     <span className="font-semibold text-lg">Rating</span>
                     <div>
-                        <input onChange={handleRatingFilter} value='stars_4' type="radio" name="stars" id="stars_4" className="me-3 w-4 h-4" />
+                        <input onChange={handleRatingFilter} checked={state.ratingFilter === 'stars_4'} value='stars_4' type="radio" name="stars" id="stars_4" className="me-3 w-4 h-4" />
                         <label htmlFor="stars_4">4 Stars & Above</label>
                     </div>
                     <div>
-                        <input onChange={handleRatingFilter} value='stars_3' type="radio" name="stars" id="stars_3" className="me-3 w-4 h-4" />
+                        <input onChange={handleRatingFilter} checked={state.ratingFilter === 'stars_3'} value='stars_3' type="radio" name="stars" id="stars_3" className="me-3 w-4 h-4" />
                         <label htmlFor="stars_3">3 Stars & Above</label>
                     </div>
                     <div>
-                        <input onChange={handleRatingFilter} value='stars_2' type="radio" name="stars" id="stars_2" className="me-3 w-4 h-4" />
+                        <input onChange={handleRatingFilter} checked={state.ratingFilter === 'stars_2'} value='stars_2' type="radio" name="stars" id="stars_2" className="me-3 w-4 h-4" />
                         <label htmlFor="stars_2">2 Stars & Above</label>
                     </div>
                     <div>
-                        <input onChange={handleRatingFilter} value='stars_1' type="radio" name="stars" id="stars_1" className="me-3 w-4 h-4" />
+                        <input onChange={handleRatingFilter} checked={state.ratingFilter === 'stars_1'} value='stars_1' type="radio" name="stars" id="stars_1" className="me-3 w-4 h-4" />
                         <label htmlFor="stars_1">1 Stars & Above</label>
                     </div>
                 </div>

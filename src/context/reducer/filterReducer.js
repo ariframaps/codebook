@@ -7,7 +7,7 @@ export const filterReducer = (state, action) => {
         case "PRICE_SORT":
             return
         case "RATING_FILTER":
-            return
+            return { ...state, ratingFilter: payload.ratingFilter }
         case "BEST_SELLER_ONLY":
             return { ...state, bestSellerFilter: payload.bestSellerFilter }
         case "INSTOCK_ONLY":

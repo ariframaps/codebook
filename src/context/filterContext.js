@@ -41,6 +41,15 @@ export const FilterProvider = ({ children }) => {
         })
     }
 
+    const ratingDispatch = (value) => {
+        dispatch({
+            type: 'RATING_FILTER',
+            payload: {
+                ratingFilter: value
+            }
+        })
+    }
+
     function bestSeller(products) {
         return state.bestSellerFilter ? products.filter((product) => product.best_seller === true) : products;
     }
@@ -49,14 +58,30 @@ export const FilterProvider = ({ children }) => {
         return state.InstockFilter ? products.filter((product) => product.in_stock === true) : products;
     }
 
-    const filteredProductsList = inStock(bestSeller(state.productsList))
+    function rating(products) {
+        switch (state.ratingFilter) {
+            case 'stars_4':
+                return products.filter((product) => product.rating >= 4)
+            case 'stars_3':
+                return products.filter((product) => product.rating >= 3)
+            case 'stars_2':
+                return products.filter((product) => product.rating >= 2)
+            case 'stars_1':
+                return products.filter((product) => product.rating >= 1)
+            default:
+                return products
+        }
+    }
+
+    const filteredProductsList = rating(inStock(bestSeller(state.productsList)))
 
     const value = {
         state,
         productsList: filteredProductsList,
         initialProductsList,
         bestSellerDispatch,
-        inStockDispatch
+        inStockDispatch,
+        ratingDispatch
     }
 
     return (
