@@ -13,7 +13,7 @@ export const filterReducer = (state, action) => {
         case "INSTOCK_ONLY":
             return { ...state, InstockFilter: payload.InstockFilter }
         default:
-            break;
+            return { productsList: state.productsList, ...payload }
     }
 
     return

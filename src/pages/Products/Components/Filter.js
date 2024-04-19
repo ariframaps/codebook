@@ -4,12 +4,10 @@ import { useFilter } from "../../../context/filterContext"
 export const Filter = ({ setShowFilter }) => {
     const [priceFilter, setPriceFilter] = useState()
 
-    const { state, bestSellerDispatch, inStockDispatch, ratingDispatch, priceDispatch } = useFilter()
+    const { state, bestSellerDispatch, inStockDispatch, ratingDispatch, priceDispatch, clearDispatch } = useFilter()
 
     function handlePriceFilter(e) {
         priceDispatch(e.target.value)
-        // setPriceFilter(e.target.value);
-        // console.log(e.target.value)
     }
 
     function handleRatingFilter(e) {
@@ -25,10 +23,7 @@ export const Filter = ({ setShowFilter }) => {
     }
 
     function handleClear() {
-        var inputElements = document.getElementsByTagName("input");
-        for (var i = 0; i < inputElements.length; i++) {
-            inputElements[i].checked = false;
-        }
+        clearDispatch()
     }
 
     return (

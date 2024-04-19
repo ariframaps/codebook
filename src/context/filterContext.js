@@ -59,6 +59,18 @@ export const FilterProvider = ({ children }) => {
         })
     }
 
+    const clearDispatch = () => {
+        dispatch({
+            type: 'CLEAR',
+            payload: {
+                priceFilter: null,
+                ratingFilter: null,
+                bestSellerFilter: false,
+                InstockFilter: false
+            }
+        })
+    }
+
     function bestSeller(products) {
         return state.bestSellerFilter ? products.filter((product) => product.best_seller === true) : products;
     }
@@ -102,7 +114,8 @@ export const FilterProvider = ({ children }) => {
         bestSellerDispatch,
         inStockDispatch,
         ratingDispatch,
-        priceDispatch
+        priceDispatch,
+        clearDispatch
     }
 
     return (
