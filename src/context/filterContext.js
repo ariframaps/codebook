@@ -15,7 +15,6 @@ export const FilterProvider = ({ children }) => {
     const [state, dispatch] = useReducer(filterReducer, initialState)
 
     const initialProductsList = (products) => {
-
         dispatch({
             type: 'PRODUCTS_LIST',
             payload: {
@@ -24,9 +23,26 @@ export const FilterProvider = ({ children }) => {
         })
     }
 
+    const bestSellerDispatch = () => {
+        dispatch({
+            type: 'BEST_SELLER_ONLY',
+            payload: {
+                bestSellerFilter: !state.bestSellerFilter
+            }
+        })
+    }
+
+    function bestSeller(products) {
+        return state.bestSellerFilter ? products.filter((product) => product.best_seller === true) : products
+    }
+
+    const filteredProductsList = bestSeller(state.productsList)
+
     const value = {
-        productsList: state.productsList,
-        initialProductsList
+        state,
+        productsList: filteredProductsList,
+        initialProductsList,
+        bestSellerDispatch
     }
 
     return (

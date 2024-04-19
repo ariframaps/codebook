@@ -1,10 +1,12 @@
 import { useState } from "react"
+import { useFilter } from "../../../context/filterContext"
 
 export const Filter = ({ setShowFilter }) => {
     const [priceFilter, setPriceFilter] = useState()
     const [ratingFilter, setRatingFilter] = useState()
-    const [bestsellerFilter, setBestsellerFilter] = useState(false)
     const [instockFilter, setInstockFilter] = useState(false)
+
+    const { state, bestSellerDispatch } = useFilter()
 
     function handlePriceFilter(e) {
         setPriceFilter(e.target.value);
@@ -17,8 +19,7 @@ export const Filter = ({ setShowFilter }) => {
     }
 
     function handleBestsellerFilter(e) {
-        setBestsellerFilter(!bestsellerFilter);
-        console.log(e.target.value)
+        bestSellerDispatch();
     }
 
     function handeleInstockFilter(e) {
@@ -75,7 +76,7 @@ export const Filter = ({ setShowFilter }) => {
                 <div className="text-lg">
                     <span className="font-semibold text-lg">Other Filters</span>
                     <div>
-                        <input onChange={handleBestsellerFilter} type="checkbox" name="bestseller" id="bestseller" className="me-3 w-4 h-4" />
+                        <input onChange={handleBestsellerFilter} checked={state.bestSellerFilter} type="checkbox" name="bestseller" id="bestseller" className="me-3 w-4 h-4" />
                         <label htmlFor="bestseller">BESTSELLER Only</label>
                     </div>
                     <div>
