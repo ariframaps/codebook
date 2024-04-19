@@ -11,7 +11,7 @@ export const filterReducer = (state, action) => {
         case "BEST_SELLER_ONLY":
             return { ...state, bestSellerFilter: payload.bestSellerFilter }
         case "INSTOCK_ONLY":
-            return
+            return { ...state, InstockFilter: payload.InstockFilter }
         default:
             break;
     }

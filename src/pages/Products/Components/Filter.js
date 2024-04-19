@@ -4,9 +4,8 @@ import { useFilter } from "../../../context/filterContext"
 export const Filter = ({ setShowFilter }) => {
     const [priceFilter, setPriceFilter] = useState()
     const [ratingFilter, setRatingFilter] = useState()
-    const [instockFilter, setInstockFilter] = useState(false)
 
-    const { state, bestSellerDispatch } = useFilter()
+    const { state, bestSellerDispatch, inStockDispatch } = useFilter()
 
     function handlePriceFilter(e) {
         setPriceFilter(e.target.value);
@@ -23,8 +22,7 @@ export const Filter = ({ setShowFilter }) => {
     }
 
     function handeleInstockFilter(e) {
-        setInstockFilter(!instockFilter);
-        console.log(e.target.value)
+        inStockDispatch();
     }
 
     function handleClear() {
@@ -80,7 +78,7 @@ export const Filter = ({ setShowFilter }) => {
                         <label htmlFor="bestseller">BESTSELLER Only</label>
                     </div>
                     <div>
-                        <input onChange={handeleInstockFilter} type="checkbox" name="instock" id="instock" className="me-3 w-4 h-4" />
+                        <input onChange={handeleInstockFilter} checked={state.InstockFilter} type="checkbox" name="instock" id="instock" className="me-3 w-4 h-4" />
                         <label htmlFor="instock">INSTOCK Only</label>
                     </div>
                 </div>

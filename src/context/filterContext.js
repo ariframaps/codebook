@@ -32,17 +32,31 @@ export const FilterProvider = ({ children }) => {
         })
     }
 
-    function bestSeller(products) {
-        return state.bestSellerFilter ? products.filter((product) => product.best_seller === true) : products
+    const inStockDispatch = () => {
+        dispatch({
+            type: 'INSTOCK_ONLY',
+            payload: {
+                InstockFilter: !state.InstockFilter
+            }
+        })
     }
 
-    const filteredProductsList = bestSeller(state.productsList)
+    function bestSeller(products) {
+        return state.bestSellerFilter ? products.filter((product) => product.best_seller === true) : products;
+    }
+
+    function inStock(products) {
+        return state.InstockFilter ? products.filter((product) => product.in_stock === true) : products;
+    }
+
+    const filteredProductsList = inStock(bestSeller(state.productsList))
 
     const value = {
         state,
         productsList: filteredProductsList,
         initialProductsList,
-        bestSellerDispatch
+        bestSellerDispatch,
+        inStockDispatch
     }
 
     return (
