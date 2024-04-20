@@ -20,7 +20,7 @@ export const ProductListPage = () => {
             initialProductsList(result)
         }
         fetchProducts()
-    }, [searchTerm])
+    }, [searchTerm, initialProductsList])
 
     return (
         <main className="mt-16">

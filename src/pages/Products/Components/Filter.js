@@ -1,9 +1,6 @@
-import { useState } from "react"
 import { useFilter } from "../../../context/filterContext"
 
 export const Filter = ({ setShowFilter }) => {
-    const [priceFilter, setPriceFilter] = useState()
-
     const { state, bestSellerDispatch, inStockDispatch, ratingDispatch, priceDispatch, clearDispatch } = useFilter()
 
     function handlePriceFilter(e) {

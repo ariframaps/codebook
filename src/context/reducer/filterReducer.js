@@ -15,6 +15,4 @@ export const filterReducer = (state, action) => {
         default:
             return { productsList: state.productsList, ...payload }
     }
-
-    return
 }
