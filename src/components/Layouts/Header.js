@@ -4,7 +4,7 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 
 import { DropdownLoggedOut } from '../Elements/DropdownLoggedOut'
 
-export const Header = () => {
+export const Header = ({ showDropdown, setShowDropdown }) => {
     // darkmode
     const localStorageTheme = JSON.parse(localStorage.getItem('darkMode'))
     const [darkMode, setDarkMode] = useState(localStorageTheme != null ? localStorageTheme : true)
@@ -14,7 +14,6 @@ export const Header = () => {
     const navigate = useNavigate()
 
     //dropdown
-    const [showDropdown, setShowDropdown] = useState(false)
     const [showMenu, setShowMenu] = useState(false)
 
     // navlink active styles
