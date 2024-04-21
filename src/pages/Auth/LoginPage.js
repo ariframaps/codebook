@@ -1,6 +1,41 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { useState } from "react";
 
 export const LoginPage = () => {
+    // response status
+    const [statusMessage, setStatusMessage] = useState();
+    const [isSuccess, setIsSuccess] = useState();
+
+    // navigate
+    const navigate = useNavigate()
+
+    async function handleLogin(e) {
+        e.preventDefault();
+
+        const userLoginInfo = {
+            email: e.target.email.value,
+            password: e.target.password.value,
+        }
+
+        const request = {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(userLoginInfo)
+        }
+
+        const response = await fetch('http://localhost:8000/login', request)
+        const data = await response.json()
+        setStatusMessage(data)
+        if (response.ok === false) {
+            setIsSuccess(false)
+        } else {
+            setIsSuccess(true)
+            setTimeout(() => {
+                navigate('/products')
+            }, 2000);
+        }
+    }
+
     return (
         <main className="bg-gray-50 dark:bg-gray-900 flex items-center  h-screen">
             <section className="w-screen">
@@ -10,7 +45,7 @@ export const LoginPage = () => {
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                                 Log in to CodeBook
                             </h2>
-                            <form className="mt-8 space-y-6" action="#">
+                            <form onSubmit={handleLogin} className="mt-8 space-y-6" action="#">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
                                     <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
@@ -19,15 +54,13 @@ export const LoginPage = () => {
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
                                     <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                                 </div>
-                                <div className="flex items-start">
-                                    <div className="flex items-center h-5">
-                                        <input id="remember" aria-describedby="remember" name="remember" type="checkbox" className="w-4 h-4 border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-blue-300 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:bg-gray-700 dark:border-gray-600" required />
-                                    </div>
-                                    <div className="ms-3 text-sm">
-                                        <label htmlFor="remember" className="font-medium text-gray-500 dark:text-gray-400">Remember this device</label>
-                                    </div>
-                                    {/* <a href="#" className="ms-auto text-sm font-medium text-blue-600 hover:underline dark:text-blue-500">Lost Password?</a> */}
-                                </div>
+                                {
+                                    statusMessage && (
+                                        <div className={`${isSuccess ? 'bg-green-100 border-green-200' : 'bg-red-100 border-red-200'} p-3 rounded-lg border `}>
+                                            <span>{isSuccess ? "Login success" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
+                                        </div>
+                                    )
+                                }
                                 <button type="submit" className="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
                                 <div className="text-sm font-medium text-gray-900 dark:text-white">
                                     Not registered yet? <Link to='/register' className="text-blue-600 hover:underline dark:text-blue-500">Create account</Link>
