@@ -1,6 +1,30 @@
 import { Link } from "react-router-dom"
 
 export const RegisterPage = () => {
+    async function handleRegister(e) {
+        e.preventDefault();
+
+        const userRegisterInfo = {
+            email: e.target.email.value,
+            password: e.target.password.value,
+            name: e.target.name.value,
+        }
+
+        const request = {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(userRegisterInfo)
+        }
+
+        try {
+            const response = await fetch('http://localhost:8000/register', request)
+            const data = await response.json()
+            console.log(data)
+        } catch (err) {
+            console.log(err)
+        }
+    }
+
     return (
         <main className="bg-gray-50 dark:bg-gray-900 flex items-center h-screen">
             <section className="w-screen">
@@ -10,7 +34,7 @@ export const RegisterPage = () => {
                             <h2 className="text-2xl font-bold text-gray-900 dark:text-white">
                                 Register to CodeBook
                             </h2>
-                            <form className="mt-8 space-y-6" action="#">
+                            <form onSubmit={handleRegister} className="mt-8 space-y-6" action="#">
                                 <div>
                                     <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
                                     <input type="text" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
