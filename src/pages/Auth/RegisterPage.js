@@ -1,6 +1,14 @@
-import { Link } from "react-router-dom"
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom"
 
 export const RegisterPage = () => {
+    // response status
+    const [statusMessage, setStatusMessage] = useState();
+    const [isSuccess, setIsSuccess] = useState();
+
+    // navigate
+    const navigate = useNavigate()
+
     async function handleRegister(e) {
         e.preventDefault();
 
@@ -16,12 +24,16 @@ export const RegisterPage = () => {
             body: JSON.stringify(userRegisterInfo)
         }
 
-        try {
-            const response = await fetch('http://localhost:8000/register', request)
-            const data = await response.json()
-            console.log(data)
-        } catch (err) {
-            console.log(err)
+        const response = await fetch('http://localhost:8000/register', request)
+        const data = await response.json()
+        setStatusMessage(data)
+        if (response.ok === false) {
+            setIsSuccess(false)
+        } else {
+            setIsSuccess(true)
+            setTimeout(() => {
+                navigate('/products')
+            }, 2000);
         }
     }
 
@@ -47,6 +59,14 @@ export const RegisterPage = () => {
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
                                     <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
                                 </div>
+                                {
+                                    statusMessage && (
+                                        <div className={`${isSuccess ? 'bg-green-100 border-green-200' : 'bg-red-100 border-red-200'} p-3 rounded-lg border `}>
+                                            <span>{isSuccess ? "Account created" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
+                                        </div>
+                                    )
+                                }
+
                                 <button type="submit" className="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Register</button>
                                 <div className="text-sm font-medium text-gray-900 dark:text-white">
                                     Already have an account? <Link to='/login' className="text-blue-600 hover:underline dark:text-blue-500">Login</Link>
@@ -55,7 +75,7 @@ export const RegisterPage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         </main >
     )
 }

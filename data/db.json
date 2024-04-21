@@ -295,6 +295,24 @@
       "password": "$2a$10$9M7nqQ0MMiq0UItfICAHeeDb9BhxzHHZmBuVK9l7BLQr.gNwxXIaS",
       "name": "rama",
       "id": 3
+    },
+    {
+      "email": "dijitalkun@gmail.com",
+      "password": "$2a$10$BvWax50VfqwNHRvbhS2H1uF0zdFIJhRZNT1XhjEFWE.z.Asvr9s7u",
+      "name": "makanan",
+      "id": 4
+    },
+    {
+      "email": "bbobibobaa@gmail.com",
+      "password": "$2a$10$wG5udROiiLVL.YO.Icyw/.T6yM/9oNNCr4vR461WX0lc0kiTII38u",
+      "name": "makanan",
+      "id": 5
+    },
+    {
+      "email": "nilsen22@unixstore.id",
+      "password": "$2a$10$VmL.pDdXJxFWkJcmYQArMu6culIO7SMKUqtBjg09cOT03/KA30gmW",
+      "name": "makanan",
+      "id": 6
     }
   ]
 }
