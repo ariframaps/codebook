@@ -12,7 +12,7 @@ export const Header = ({ showDropdown, setShowDropdown, isLoggedIn, setIsLoggedI
     useEffect(() => {
         const user = JSON.parse(sessionStorage.getItem('CodebookAuth'))
         user ? setIsLoggedIn(true) : setIsLoggedIn(false)
-    }, [isLoggedIn])
+    }, [isLoggedIn, setIsLoggedIn])
 
 
     // cartlist length
