@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 
-export const LoginPage = () => {
+export const LoginPage = ({ setIsLoggedIn }) => {
     // response status
     const [statusMessage, setStatusMessage] = useState();
     const [isSuccess, setIsSuccess] = useState();
@@ -26,18 +26,25 @@ export const LoginPage = () => {
         const response = await fetch('http://localhost:8000/login', request)
         const data = await response.json()
         setStatusMessage(data)
+        console.log(data)
         if (response.ok === false) {
             setIsSuccess(false)
         } else {
             setIsSuccess(true)
             setTimeout(() => {
+                const sessionData = {
+                    accessToken: data.accessToken,
+                    user: data.user
+                }
+                sessionStorage.setItem('CodebookAuth', JSON.stringify(sessionData))
+                setIsLoggedIn(true)
                 navigate('/products')
-            }, 2000);
+            }, 1000);
         }
     }
 
     return (
-        <main className="bg-gray-50 dark:bg-gray-900 flex items-center  h-screen">
+        <main className="bg-gray-50 dark:bg-gray-900 flex items-center">
             <section className="w-screen">
                 <div className="mx-auto max-w-screen-xl">
                     <div>

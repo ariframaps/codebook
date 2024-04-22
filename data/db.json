@@ -313,6 +313,12 @@
       "password": "$2a$10$VmL.pDdXJxFWkJcmYQArMu6culIO7SMKUqtBjg09cOT03/KA30gmW",
       "name": "makanan",
       "id": 6
+    },
+    {
+      "email": "arif@mail.com",
+      "password": "$2a$10$8nHjtryNJopEsPhtpTxHTeLCSrDTQYvKlT5qCifLpIcUZCPcvHELa",
+      "name": "arif rama",
+      "id": 7
     }
   ]
 }

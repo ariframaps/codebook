@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 
-export const RegisterPage = () => {
+export const RegisterPage = ({ setIsLoggedIn }) => {
     // response status
     const [statusMessage, setStatusMessage] = useState();
     const [isSuccess, setIsSuccess] = useState();
@@ -32,13 +32,19 @@ export const RegisterPage = () => {
         } else {
             setIsSuccess(true)
             setTimeout(() => {
+                const sessionData = {
+                    accessToken: data.accessToken,
+                    user: data.user
+                }
+                sessionStorage.setItem('CodebookAuth', JSON.stringify(sessionData))
+                setIsLoggedIn(true)
                 navigate('/products')
             }, 2000);
         }
     }
 
     return (
-        <main className="bg-gray-50 dark:bg-gray-900 flex items-center h-screen">
+        <main className="bg-gray-50 dark:bg-gray-900 flex items-center">
             <section className="w-screen">
                 <div className="mx-auto max-w-screen-xl">
                     <div>
