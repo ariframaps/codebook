@@ -2,10 +2,11 @@ import { CartItem } from "./Components/CartItem"
 import { EmptyCart } from "./Components/EmptyCart"
 import { Checkout } from "./Components/Checkout"
 import { useState } from "react"
+import { useCart } from "../../context/CartContext"
 
 export const CartPage = () => {
     const [showCheckout, setShowCheckout] = useState(false)
-    let cartList = [1, 1, 1]
+    const { cartList } = useCart()
 
     return (
         <main className="flex justify-center items-start mt-20">
