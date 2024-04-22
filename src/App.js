@@ -15,7 +15,7 @@ function App() {
   return (
     <div onClick={handleAppClick} className="App">
       <Header showDropdown={showDropdown} setShowDropdown={setShowDropdown} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
-      <AllRoutes setIsLoggedIn={setIsLoggedIn} />
+      <AllRoutes isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} />
       <Footer />
     </div>
   );
