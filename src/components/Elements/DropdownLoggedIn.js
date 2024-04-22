@@ -11,7 +11,7 @@ export const DropdownLoggedIn = () => {
           <NavLink to="/dashboard" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Dashboard</NavLink>
         </li>
         <li>
-          <NavLink to="#" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cart</NavLink>
+          <NavLink to="/cart" className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-600 dark:hover:text-white">Cart</NavLink>
         </li>
       </ul>
       <div className="py-1">
