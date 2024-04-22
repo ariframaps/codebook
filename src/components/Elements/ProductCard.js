@@ -1,7 +1,28 @@
 import { Link } from "react-router-dom"
 import { Rating } from "./Rating"
+import { useCart } from "../../context/CartContext"
+import { useEffect, useState } from "react"
 
 export const ProductCard = ({ product }) => {
+    // product destructuring
+    const { id, poster, name, overview, rating, price, best_seller } = product
+
+    // cart dispatch function
+    const { cartList, addToCart, removeFromCart } = useCart()
+    // is product in cart list check
+    const [isInCart, setIsInCart] = useState(false)
+
+    useEffect(() => {
+        const find = cartList.find(cartItem => cartItem.id === product.id)
+        setIsInCart(find)
+    }, [cartList, product.id])
+
+    // button color style
+    const button = {
+        disabled: 'bg-slate-700 dark:bg-slate-600',
+        blue: 'bg-blue-700 hover:bg-blue-800 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800',
+        red: 'bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
+    }
 
     // product thumbnail styles
     const imgStyle = (url) => {
@@ -15,7 +36,10 @@ export const ProductCard = ({ product }) => {
         return style;
     }
 
-    const { id, poster, name, overview, rating, price, best_seller } = product
+    function handleButton() {
+        setIsInCart(!isInCart);
+        isInCart ? removeFromCart(product) : addToCart(product);
+    }
 
     return (
         <div className="w-full flex flex-col justify-between max-w-sm relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
@@ -36,7 +60,9 @@ export const ProductCard = ({ product }) => {
                 </div>
                 <div className="flex items-center justify-between">
                     <span className="text-3xl font-bold text-gray-900 dark:text-white">${price}</span>
-                    <button className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Add to cart</button>
+                    <button disabled={!product.in_stock} onClick={handleButton} className={`${product.in_stock ? (isInCart ? button.red : button.blue) : button.disabled} text-white font-medium rounded-lg text-sm px-5 py-2.5 text-center focus:ring-4 focus:outline-none`}>
+                        {isInCart ? 'Remove' : 'Add to cart'}
+                    </button>
                 </div>
             </div>
         </div>

@@ -5,7 +5,12 @@ import { Link, NavLink, useNavigate } from 'react-router-dom'
 import { DropdownLoggedOut } from '../Elements/DropdownLoggedOut'
 import { DropdownLoggedIn } from '../Elements/DropdownLoggedIn'
 
+import { useCart } from '../../context/CartContext'
+
 export const Header = ({ showDropdown, setShowDropdown }) => {
+    // cartlist length
+    const cartLength = useCart().cartList.length
+
     // darkmode
     const localStorageTheme = JSON.parse(localStorage.getItem('darkMode'))
     const [darkMode, setDarkMode] = useState(localStorageTheme != null ? localStorageTheme : true)
@@ -56,10 +61,16 @@ export const Header = ({ showDropdown, setShowDropdown }) => {
                                     </button>
                                 </li>
                                 <li>
-                                    <NavLink to="/cart" className={({ isActive }) => isActive ? classActive : classInactive}><i className="bi bi-bag-fill"></i></NavLink>
+                                    <NavLink to="/cart" className={({ isActive }) => isActive ? classActive : classInactive}>
+                                        <span className="bi bi-bag-fill relative text-2xl">
+                                            <span className='absolute left-4 bottom-3 text-sm text-white bg-red-600 px-1 rounded-md'>
+                                                {cartLength}
+                                            </span>
+                                        </span>
+                                    </NavLink>
                                 </li>
                                 <li>
-                                    <button onClick={() => setShowDropdown(!showDropdown)} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"><i className="bi bi-person-circle"></i>  </button>
+                                    <button onClick={() => setShowDropdown(!showDropdown)} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"><i className="bi bi-person-circle text-2xl"></i>  </button>
                                     {showDropdown ? <DropdownLoggedIn /> : ''}
                                 </li>
                             </ul >

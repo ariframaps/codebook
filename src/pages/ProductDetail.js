@@ -1,23 +1,41 @@
 import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Rating } from "../components"
+import { useCart } from "../context/CartContext"
 
 export const ProductDetail = () => {
     const { id } = useParams()
-
     const [product, setProduct] = useState()
+
+    // is product in cart list check
+    const { cartList, addToCart, removeFromCart } = useCart()
+    const [isInCart, setIsInCart] = useState(false)
 
     useEffect(() => {
         const fetchProduct = async () => {
             const response = await fetch(`http://localhost:8000/products?id=${id}`)
             const result = await response.json()
             setProduct(result[0])
+            const find = cartList.find(cartItem => cartItem.id === result[0].id)
+            setIsInCart(find)
         }
         fetchProduct()
-    }, [id])
+    }, [id, cartList])
+
+    // button
+    function handleButton() {
+        setIsInCart(!isInCart);
+        isInCart ? removeFromCart(product) : addToCart(product);
+    }
+
+    const button = {
+        disabled: 'bg-slate-700 dark:bg-slate-600',
+        blue: 'bg-blue-700 hover:bg-blue-800 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800',
+        red: 'bg-red-700 hover:bg-red-800 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
+    }
 
     return (
-        <main className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased mt-16">
+        <main className="py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
             {product && (
                 <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
                     <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
@@ -75,8 +93,8 @@ export const ProductDetail = () => {
                                     Add to favorites
                                 </button>
 
-                                <button
-                                    className="text-white mt-4 sm:mt-0 bg-primary-700 hover:bg-primary-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 dark:bg-primary-600 dark:hover:bg-primary-700 focus:outline-none dark:focus:ring-primary-800 flex items-center justify-center"
+                                <button onClick={handleButton} disabled={!product.in_stock}
+                                    className={`${product.in_stock ? (isInCart ? button.red : button.blue) : button.disabled} text-white mt-4 sm:mt-0 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 focus:outline-none flex items-center justify-center`}
                                 >
                                     <svg
                                         className="w-5 h-5 -ms-2 me-2"
@@ -95,8 +113,7 @@ export const ProductDetail = () => {
                                             d="M4 4h1.5L8 16m0 0h8m-8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm8 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm.75-3H7.5M11 7H6.312M17 4v6m-3-3h6"
                                         />
                                     </svg>
-
-                                    Add to cart
+                                    {isInCart ? 'Remove' : 'Add to cart'}
                                 </button>
                             </div>
 

@@ -6,7 +6,7 @@ import { useCart } from "../../context/CartContext"
 
 export const CartPage = () => {
     const [showCheckout, setShowCheckout] = useState(false)
-    const { cartList } = useCart()
+    const { cartList, totalPrice } = useCart()
 
     return (
         <main className="flex justify-center items-start mt-20">
@@ -14,12 +14,12 @@ export const CartPage = () => {
                 <div className="flex items-center justify-between mb-4">
                     <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Cart ({cartList.length})</h5>
                     <span className="text-xl font-medium text-blue-600 dark:text-blue-300">
-                        total price: $325
+                        total price: ${totalPrice}
                     </span>
                 </div>
                 {(cartList.length > 0) ? (
                     <div className="flow-root">
-                        <ul className="divide-y divide-gray-200 dark:divide-gray-700">
+                        <ul className="divide-y-2 divide-gray-200 dark:divide-gray-600 my-5">
                             {cartList.map((item, index) => (
                                 <CartItem item={item} key={index} />
                             ))}

@@ -23,7 +23,7 @@ export const ProductListPage = () => {
     }, [searchTerm, initialProductsList])
 
     return (
-        <main className="mt-16">
+        <main>
             {showFilter && (<Filter setShowFilter={setShowFilter} />)}
             <div className=" max-w-screen-xl mx-auto p-4">
                 <div className="flex justify-between my-6 text-2xl">

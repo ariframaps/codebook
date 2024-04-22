@@ -9,10 +9,39 @@ const initialState = {
 const CartContext = createContext(initialState)
 
 export const CartProvider = ({ children }) => {
-    const [state, dispatch] = useReducer(CartContext, initialState)
+    const [state, dispatch] = useReducer(CartReducer, initialState)
+
+    function addToCart(product) {
+        const newCartList = state.cartList.concat(product)
+        const newTotalPrice = state.totalPrice + product.price
+
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: {
+                cartList: newCartList,
+                totalPrice: newTotalPrice
+            }
+        })
+    }
+
+    function removeFromCart(product) {
+        const newCartList = state.cartList.filter(cartItem => cartItem.id !== product.id)
+        const newTotalPrice = state.totalPrice - product.price
+
+        dispatch({
+            type: 'ADD_TO_CART',
+            payload: {
+                cartList: newCartList,
+                totalPrice: newTotalPrice
+            }
+        })
+    }
 
     const value = {
-        cartList: [1, 2, 3, 1, 1, 1]
+        cartList: state.cartList,
+        totalPrice: state.totalPrice,
+        addToCart,
+        removeFromCart
     }
 
     return (
