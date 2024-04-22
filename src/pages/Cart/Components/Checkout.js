@@ -1,7 +1,27 @@
+import { useEffect, useState } from "react"
 import { useCart } from "../../../context/CartContext"
 
 export const Checkout = ({ setShowCheckout }) => {
     const { totalPrice } = useCart()
+
+    const sessionData = JSON.parse(sessionStorage.getItem('CodebookAuth'));
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            const response = await fetch(`http://localhost:8000/600/users/${sessionData.id}`, {
+                type: 'GET',
+                headers: {
+                    "content-type": "application/json",
+                    Authorization: `Bearer ${sessionData.accessToken}`
+                }
+            })
+            const data = await response.json();
+            setUser(data)
+        }
+        fetchUserData()
+    }, [])
+
 
     return (
         <div id="authentication-modal" tabIndex="-1" aria-hidden="true" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-slate-200/50 backdrop-blur-sm">
@@ -25,25 +45,25 @@ export const Checkout = ({ setShowCheckout }) => {
                         <form className="space-y-4" action="#">
                             <div>
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
-                                <input type="name" name="name" id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                                <input disabled value={user.name || ''} type="name" name="name" id="name" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name" required />
                             </div>
                             <div>
                                 <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
+                                <input disabled value={user.email || ''} type="email" name="email" id="email" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name@company.com" required />
                             </div>
                             <div>
                                 <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your card number</label>
                                 <input type="number" name="number" id="number" placeholder="12345678" className="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                             </div>
                             <div>
-                                <label htmlFor="expire" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expire date</label>
+                                <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Expire date</label>
                                 <div className='flex gap-5'>
                                     <input type="number" name="month" id="month" placeholder="03" className="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                                     <input type="number" name="date" id="date" placeholder="27" className="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor="number" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Security code</label>
+                                <label htmlFor="code" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Security code</label>
                                 <input type="number" name="code" id="code" placeholder="111" className="appearance-none bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required />
                             </div>
                             <h3 className="text-xl text-center font-semibold text-green-500 dark:text-green-200">

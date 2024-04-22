@@ -34,7 +34,8 @@ export const RegisterPage = ({ setIsLoggedIn }) => {
             setTimeout(() => {
                 const sessionData = {
                     accessToken: data.accessToken,
-                    user: data.user
+                    id: data.user.id,
+                    name: data.user.name
                 }
                 sessionStorage.setItem('CodebookAuth', JSON.stringify(sessionData))
                 setIsLoggedIn(true)

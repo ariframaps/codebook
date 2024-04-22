@@ -26,7 +26,6 @@ export const LoginPage = ({ setIsLoggedIn }) => {
         const response = await fetch('http://localhost:8000/login', request)
         const data = await response.json()
         setStatusMessage(data)
-        console.log(data)
         if (response.ok === false) {
             setIsSuccess(false)
         } else {
@@ -34,7 +33,8 @@ export const LoginPage = ({ setIsLoggedIn }) => {
             setTimeout(() => {
                 const sessionData = {
                     accessToken: data.accessToken,
-                    user: data.user
+                    id: data.user.id,
+                    name: data.user.name
                 }
                 sessionStorage.setItem('CodebookAuth', JSON.stringify(sessionData))
                 setIsLoggedIn(true)
