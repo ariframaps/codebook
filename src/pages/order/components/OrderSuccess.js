@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-export const OrderSuccess = () => {
+export const OrderSuccess = ({ user }) => {
     return (
         <div className="my-20 overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-modal md:h-full">
             <div className="max-w-screen-md mx-auto relative p-4 w-full h-full md:h-auto">
@@ -12,8 +12,8 @@ export const OrderSuccess = () => {
                     </div>
                     <p className="mb-4 text-lg font-semibold text-gray-900 dark:text-white">Order successful.</p>
                     <div className="flex flex-col items-center text-gray-900 dark:text-white">
-                        <p>Thank you (username) for your order</p>
-                        <p>Please check your mail (user@mail.com) for the eBook</p>
+                        <p>Thank you <span className="font-semibold">{user.name}</span> for your order</p>
+                        <p>Please check your mail ({user.email}) for the eBook</p>
                         <div className="p-3 text-start w-fit rounded border border-slate-300 my-7">
                             <p>Order ID: (5)</p>
                             <p>Payment ID: xyz12345454</p>

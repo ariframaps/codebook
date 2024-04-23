@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 
 export const Checkout = ({ setShowCheckout }) => {
     const navigate = useNavigate()
-    const { totalPrice } = useCart()
+    const { cartList, totalPrice } = useCart()
 
     const sessionData = JSON.parse(sessionStorage.getItem('CodebookAuth'));
     const [user, setUser] = useState({});
@@ -25,10 +25,47 @@ export const Checkout = ({ setShowCheckout }) => {
         fetchUserData()
     }, [sessionData])
 
-    function handleSubmit(e) {
+    async function handleSubmit(e) {
         e.preventDefault();
-        console.log(e.target)
-        navigate('/order-status')
+
+        try {
+            const userOrder = {
+                cartList: cartList,
+                amount_paid: totalPrice,
+                quantity: cartList.length,
+                user: {
+                    name: user.name,
+                    email: user.email,
+                    id: user.id
+                },
+            }
+
+            const response = await fetch("http://localhost:8000/660/orders", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${sessionData.accessToken}`
+                },
+                body: JSON.stringify(userOrder)
+            });
+            // const janganLupaIniKalauJWTExpired = null
+            const data = await response.json();
+            console.log(data);
+
+            navigate('/order-status', {
+                state: {
+                    status: true,
+                    user: user
+                }
+            })
+        } catch (err) {
+            console.log("halo ini eror" + err.message)
+            navigate('/order-status', {
+                state: {
+                    status: false,
+                }
+            })
+        }
     }
 
     return (
