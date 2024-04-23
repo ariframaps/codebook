@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react"
 import { useCart } from "../../../context/CartContext"
+import { useNavigate } from "react-router-dom"
 
 export const Checkout = ({ setShowCheckout }) => {
+    const navigate = useNavigate()
     const { totalPrice } = useCart()
 
     const sessionData = JSON.parse(sessionStorage.getItem('CodebookAuth'));
@@ -16,12 +18,18 @@ export const Checkout = ({ setShowCheckout }) => {
                     Authorization: `Bearer ${sessionData.accessToken}`
                 }
             })
+            const janganLupaIniKalauJWTExpired = null
             const data = await response.json();
             setUser(data)
         }
         fetchUserData()
-    }, [])
+    }, [sessionData])
 
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(e.target)
+        navigate('/order-status')
+    }
 
     return (
         <div id="authentication-modal" tabIndex="-1" aria-hidden="true" className="overflow-y-auto overflow-x-hidden fixed top-0 right-0 left-0 z-50 flex justify-center items-center w-full md:inset-0 h-[calc(100%-1rem)] max-h-full bg-slate-200/50 backdrop-blur-sm">
@@ -42,7 +50,7 @@ export const Checkout = ({ setShowCheckout }) => {
                     </div>
                     {/* <!-- Modal body --> */}
                     <div className="p-4 md:p-5">
-                        <form className="space-y-4" action="#">
+                        <form onSubmit={handleSubmit} className="space-y-4">
                             <div>
                                 <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your name</label>
                                 <input disabled value={user.name || ''} type="name" name="name" id="name" className="bg-gray-100 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" placeholder="name" required />

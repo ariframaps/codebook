@@ -20,4 +20,7 @@ import { PageNotFound } from './PageNotFound'
 // product detail
 import { ProductDetail } from './ProductDetail'
 
-export { LoginPage, RegisterPage, CartPage, DashboardPage, HomePage, ProductListPage, PageNotFound, ProductDetail }
+// order page
+import { OrderPage } from './order/OrderPage'
+
+export { LoginPage, RegisterPage, CartPage, DashboardPage, HomePage, ProductListPage, PageNotFound, ProductDetail, OrderPage }
