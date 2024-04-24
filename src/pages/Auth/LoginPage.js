@@ -2,10 +2,12 @@ import { LoginRequest } from "../../services/AuthService";
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
+import { Loading } from "../../components/Elements/Loading";
 
 export const LoginPage = () => {
     const navigate = useNavigate() // useNavigate
     const { setLoggedIn } = useAuth() // auth reducer
+    const [isLoading, setIsLoading] = useState()
 
     // response status
     const [statusMessage, setStatusMessage] = useState(); // response status message
@@ -19,7 +21,10 @@ export const LoginPage = () => {
             password: e.target.password.value,
         }
 
+        setIsLoading(true);
         const data = await LoginRequest(userLoginInfo) // login request
+        setIsLoading(false);
+
         if (typeof (data) === "string") { // if string, then it is returning error message string
             setStatusMessage(data) // set response status message
             setIsSuccess(false)
@@ -51,7 +56,11 @@ export const LoginPage = () => {
                                 {
                                     statusMessage && (
                                         <div className={`${isSuccess ? 'bg-green-100 border-green-200' : 'bg-red-100 border-red-200'} p-3 rounded-lg border `}>
-                                            <span>{isSuccess ? "Login success" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
+                                            {isLoading ? (
+                                                <Loading />
+                                            ) : (
+                                                <span>{isSuccess ? "Login success" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
+                                            )}
                                         </div>
                                     )
                                 }
@@ -63,7 +72,7 @@ export const LoginPage = () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section >
         </main >
     )
 }

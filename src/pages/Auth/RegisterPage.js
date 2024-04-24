@@ -2,10 +2,12 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom"
 import { RegisterRequest } from "../../services/AuthService";
 import { useAuth } from "../../context/AuthContext";
+import { Loading } from "../../components/Elements/Loading";
 
 export const RegisterPage = () => {
     const navigate = useNavigate()
     const { setLoggedIn } = useAuth()
+    const [isLoading, setIsLoading] = useState()
 
     // response status
     const [statusMessage, setStatusMessage] = useState();
@@ -20,7 +22,10 @@ export const RegisterPage = () => {
             name: e.target.name.value,
         }
 
+        setIsLoading(true);
         const data = await RegisterRequest(userRegisterInfo) // register request
+        setIsLoading(false);
+
         setStatusMessage(data)
         if (typeof (data) === "string") {
             setIsSuccess(false)
@@ -56,7 +61,11 @@ export const RegisterPage = () => {
                                 {
                                     statusMessage && (
                                         <div className={`${isSuccess ? 'bg-green-100 border-green-200' : 'bg-red-100 border-red-200'} p-3 rounded-lg border `}>
-                                            <span>{isSuccess ? "Account created" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
+                                            {isLoading ? (
+                                                <Loading />
+                                            ) : (
+                                                <span>{isSuccess ? "Account created" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
+                                            )}
                                         </div>
                                     )
                                 }

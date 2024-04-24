@@ -11,4 +11,7 @@ import { Footer } from "./Layouts/Footer";
 // other
 import ScrollToTop from "./Other/ScrollToTop";
 
-export { ProductCard, Header, Footer, ScrollToTop, Rating, DropdownLoggedIn, DropdownLoggedOut }
+// load
+import { Loading } from "./Elements/Loading";
+
+export { ProductCard, Header, Footer, ScrollToTop, Rating, DropdownLoggedIn, DropdownLoggedOut, Loading }
