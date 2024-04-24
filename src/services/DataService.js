@@ -20,7 +20,6 @@ export const GetUser = async (sessionData) => {
             Authorization: `Bearer ${sessionData.accessToken}`
         }
     })
-    const janganLupaIniKalauJWTExpired = null
     const data = await response.json();
     return data
 }

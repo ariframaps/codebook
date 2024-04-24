@@ -1,9 +1,12 @@
 import { LoginRequest } from "../../services/AuthService";
-import { SetSessionStorage } from "../../services/DataService";
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
+import { useAuth } from "../../context/AuthContext";
 
-export const LoginPage = ({ setIsLoggedIn }) => {
+export const LoginPage = () => {
+    // auth reducer
+    const { setLoggedIn } = useAuth()
+
     // response status
     const [statusMessage, setStatusMessage] = useState();
     const [isSuccess, setIsSuccess] = useState();
@@ -26,8 +29,7 @@ export const LoginPage = ({ setIsLoggedIn }) => {
         } else {
             setIsSuccess(true)
             setTimeout(() => {
-                SetSessionStorage(data)
-                setIsLoggedIn(true)
+                setLoggedIn(data)
                 navigate('/products')
             }, 1000);
         }

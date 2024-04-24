@@ -21,7 +21,3 @@ export const RegisterRequest = async (userRegisterInfo) => {
     const data = await response.json()
     return data
 }
-
-export const LogOut = () => {
-    sessionStorage.removeItem('CodebookAuth')
-}

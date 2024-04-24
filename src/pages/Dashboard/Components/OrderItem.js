@@ -1,5 +1,3 @@
-import logo from '../../../assets/logo.png'
-
 export const OrderItem = ({ item }) => {
     return (
         <li className="py-3 px-3 sm:py-4 bg-slate-100 dark:bg-gray-700">

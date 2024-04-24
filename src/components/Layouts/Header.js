@@ -6,14 +6,10 @@ import { DropdownLoggedOut } from '../Elements/DropdownLoggedOut'
 import { DropdownLoggedIn } from '../Elements/DropdownLoggedIn'
 
 import { useCart } from '../../context/CartContext'
+import { useAuth } from '../../context/AuthContext'
 
-export const Header = ({ showDropdown, setShowDropdown, isLoggedIn, setIsLoggedIn }) => {
-    // check user is logged in
-    useEffect(() => {
-        const user = JSON.parse(sessionStorage.getItem('CodebookAuth'))
-        user ? setIsLoggedIn(true) : setIsLoggedIn(false)
-    }, [isLoggedIn, setIsLoggedIn])
-
+export const Header = ({ showDropdown, setShowDropdown }) => {
+    const { isLoggedIn } = useAuth()
 
     // cartlist length
     const cartLength = useCart().cartList.length
@@ -78,7 +74,7 @@ export const Header = ({ showDropdown, setShowDropdown, isLoggedIn, setIsLoggedI
                                 </li>
                                 <li>
                                     <button onClick={() => setShowDropdown(!showDropdown)} id="dropdownNavbarLink" data-dropdown-toggle="dropdownNavbar" className="flex items-center justify-between w-full py-2 px-3 text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 md:w-auto dark:text-white md:dark:hover:text-blue-500 dark:focus:text-white dark:hover:bg-gray-700 md:dark:hover:bg-transparent"><i className="bi bi-person-circle text-2xl"></i>  </button>
-                                    {showDropdown && (isLoggedIn ? <DropdownLoggedIn setIsLoggedIn={setIsLoggedIn} /> : <DropdownLoggedOut />)}
+                                    {showDropdown && (isLoggedIn ? <DropdownLoggedIn /> : <DropdownLoggedOut />)}
                                 </li>
                             </ul >
                         </div >

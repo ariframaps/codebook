@@ -7,7 +7,7 @@ import { PostOrder } from "../../../services/DataService"
 
 export const Checkout = ({ setShowCheckout }) => {
     const navigate = useNavigate()
-    const { cartList, totalPrice } = useCart()
+    const { cartList, totalPrice, clearCart } = useCart()
 
     const sessionData = GetSessionStorage();
     const [user, setUser] = useState({});
@@ -42,6 +42,7 @@ export const Checkout = ({ setShowCheckout }) => {
                     user: user
                 }
             })
+            clearCart();
         } catch (err) {
             navigate('/order-status', {
                 state: {
