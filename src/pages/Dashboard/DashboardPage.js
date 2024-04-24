@@ -9,7 +9,7 @@ export const DashboardPage = () => {
     useEffect(() => {
         const fetchData = async () => {
             const data = await GetOrder() // fetch user order list
-            setOrderList(data)
+            setOrderList(data.reverse())
         }
         fetchData()
     }, [])

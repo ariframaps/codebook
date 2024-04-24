@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom"
+import { NavLink } from "react-router-dom"
 
 export const OrderSuccess = ({ user }) => {
     return (
@@ -19,9 +19,9 @@ export const OrderSuccess = ({ user }) => {
                             <p>Payment ID: xyz12345454</p>
                         </div>
                     </div>
-                    <Link to='/dashboard' className="py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900">
+                    <NavLink to='/dashboard' className="py-2 px-3 text-sm font-medium text-center text-white rounded-lg bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 dark:focus:ring-primary-900">
                         Continue
-                    </Link>
+                    </NavLink>
                 </div>
             </div>
         </div>

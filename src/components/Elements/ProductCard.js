@@ -1,11 +1,14 @@
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { Rating } from "./Rating"
 import { useCart } from "../../context/CartContext"
 import { useEffect, useState } from "react"
+import { useAuth } from "../../context/AuthContext"
 
 export const ProductCard = ({ product }) => {
     const { cartList, addToCart, removeFromCart } = useCart() // cart reducer
     const [isInCart, setIsInCart] = useState(false) // is product in cart list status
+    const { isLoggedIn } = useAuth() // logged in status
+    const navigate = useNavigate()
 
     useEffect(() => {
         const find = cartList.find(cartItem => cartItem.id === product.id) // find product
@@ -32,6 +35,10 @@ export const ProductCard = ({ product }) => {
     }
 
     function handleButton() {
+        if (!isLoggedIn) {
+            navigate('/login');
+            return;
+        }
         setIsInCart(!isInCart);
         isInCart ? removeFromCart(product) : addToCart(product);
     }

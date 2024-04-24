@@ -1,9 +1,12 @@
 import { createContext, useContext, useReducer } from "react"
 import { AuthReducer } from "./reducer/AuthReducer"
 import { SetSessionStorage } from "../services/DataService"
+import { GetSessionStorage } from "../services/DataService"
+
+const user = Boolean(GetSessionStorage())
 
 const initialState = {
-    isLoggedIn: false,
+    isLoggedIn: user,
 }
 
 const AuthContext = createContext(initialState)
