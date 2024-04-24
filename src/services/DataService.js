@@ -13,7 +13,7 @@ export const GetSessionStorage = () => {
 }
 
 export const GetUser = async (sessionData) => {
-    const response = await fetch(`http://localhost:8000/600/users/${sessionData.id}`, {
+    const response = await fetch(`${process.env.REACT_APP_HOST}/600/users/${sessionData.id}`, {
         type: 'GET',
         headers: {
             "content-type": "application/json",
@@ -25,7 +25,7 @@ export const GetUser = async (sessionData) => {
 }
 
 export const PostOrder = async (userOrder, sessionData) => {
-    await fetch("http://localhost:8000/660/orders", {
+    await fetch(`${process.env.REACT_APP_HOST}/660/orders`, {
         method: "POST",
         headers: {
             "Content-Type": "application/json",
@@ -38,7 +38,7 @@ export const PostOrder = async (userOrder, sessionData) => {
 export const GetOrder = async () => {
     const user = GetSessionStorage()
 
-    const response = await fetch(`http://localhost:8000/660/orders`, {
+    const response = await fetch(`${process.env.REACT_APP_HOST}/660/orders`, {
         type: 'GET',
         headers: { 'content-type': 'application/json', Authorization: `Bearer ${user.accessToken}` }
     })

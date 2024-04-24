@@ -5,7 +5,7 @@ export const LoginRequest = async (userLoginInfo) => {
         body: JSON.stringify(userLoginInfo)
     }
 
-    const response = await fetch('http://localhost:8000/login', request)
+    const response = await fetch(`${process.env.REACT_APP_HOST}/login`, request)
     const data = await response.json()
     return data
 }
@@ -17,7 +17,7 @@ export const RegisterRequest = async (userRegisterInfo) => {
         body: JSON.stringify(userRegisterInfo)
     }
 
-    const response = await fetch('http://localhost:8000/register', request)
+    const response = await fetch(`${process.env.REACT_APP_HOST}/register`, request)
     const data = await response.json()
     return data
 }
