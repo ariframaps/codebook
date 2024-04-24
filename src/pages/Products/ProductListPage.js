@@ -3,6 +3,7 @@ import { ProductCard } from "../../components"
 import { Filter } from "./Components/Filter"
 import { useLocation } from "react-router-dom"
 import { useFilter } from "../../context/filterContext"
+import { GetProducts } from "../../services/ProductService"
 
 export const ProductListPage = () => {
     const [showFilter, setShowFilter] = useState(false)
@@ -12,8 +13,7 @@ export const ProductListPage = () => {
 
     useEffect(() => {
         const fetchProducts = async () => {
-            const response = await fetch('http://localhost:8000/products')
-            let result = await response.json()
+            let result = await GetProducts()
             if (searchTerm) {
                 result = await result.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
             }

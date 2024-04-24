@@ -2,6 +2,7 @@ import { useParams } from "react-router-dom"
 import { useState, useEffect } from "react"
 import { Rating } from "../components"
 import { useCart } from "../context/CartContext"
+import { GetProductDetail } from "../services/ProductService"
 
 export const ProductDetail = () => {
     const { id } = useParams()
@@ -13,8 +14,7 @@ export const ProductDetail = () => {
 
     useEffect(() => {
         const fetchProduct = async () => {
-            const response = await fetch(`http://localhost:8000/products?id=${id}`)
-            const result = await response.json()
+            const result = await GetProductDetail(id)
             setProduct(result[0])
             const find = cartList.find(cartItem => cartItem.id === result[0].id)
             setIsInCart(find)

@@ -1,25 +1,20 @@
 import { useEffect, useState } from "react"
 import { useCart } from "../../../context/CartContext"
 import { useNavigate } from "react-router-dom"
+import { GetSessionStorage } from "../../../services/DataService"
+import { GetUser } from "../../../services/DataService"
+import { PostOrder } from "../../../services/DataService"
 
 export const Checkout = ({ setShowCheckout }) => {
     const navigate = useNavigate()
     const { cartList, totalPrice } = useCart()
 
-    const sessionData = JSON.parse(sessionStorage.getItem('CodebookAuth'));
+    const sessionData = GetSessionStorage();
     const [user, setUser] = useState({});
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const response = await fetch(`http://localhost:8000/600/users/${sessionData.id}`, {
-                type: 'GET',
-                headers: {
-                    "content-type": "application/json",
-                    Authorization: `Bearer ${sessionData.accessToken}`
-                }
-            })
-            const janganLupaIniKalauJWTExpired = null
-            const data = await response.json();
+            const data = await GetUser(sessionData)
             setUser(data)
         }
         fetchUserData()
@@ -39,18 +34,7 @@ export const Checkout = ({ setShowCheckout }) => {
                     id: user.id
                 },
             }
-
-            const response = await fetch("http://localhost:8000/660/orders", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${sessionData.accessToken}`
-                },
-                body: JSON.stringify(userOrder)
-            });
-            // const janganLupaIniKalauJWTExpired = null
-            const data = await response.json();
-            console.log(data);
+            PostOrder(userOrder, sessionData)
 
             navigate('/order-status', {
                 state: {
@@ -59,7 +43,6 @@ export const Checkout = ({ setShowCheckout }) => {
                 }
             })
         } catch (err) {
-            console.log("halo ini eror" + err.message)
             navigate('/order-status', {
                 state: {
                     status: false,

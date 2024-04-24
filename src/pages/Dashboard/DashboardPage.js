@@ -1,22 +1,15 @@
 import { useEffect, useState } from "react"
 import { DashBoardEmpty } from "./Components/DashBoardEmpty"
 import { OrderCard } from "./Components/OrderCard"
+import { GetOrder } from "../../services/DataService"
 
 export const DashboardPage = () => {
     const [orderList, setOrderList] = useState([])
 
-    const user = JSON.parse(sessionStorage.getItem('CodebookAuth'))
-
     useEffect(() => {
-        async function fetchData() {
-            const response = await fetch(`http://localhost:8000/660/orders`, {
-                type: 'GET',
-                headers: { 'content-type': 'application/json', Authorization: `Bearer ${user.accessToken}` }
-            })
-            const data = await response.json()
-            const filteredOrderList = data.filter((order) => order.user.id === user.id)
-            console.log(filteredOrderList)
-            setOrderList(filteredOrderList)
+        const fetchData = async () => {
+            const data = await GetOrder()
+            setOrderList(data)
         }
         fetchData()
     }, [])

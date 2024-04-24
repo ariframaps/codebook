@@ -1,3 +1,5 @@
+import { LoginRequest } from "../../services/AuthService";
+import { SetSessionStorage } from "../../services/DataService";
 import { Link, useNavigate } from "react-router-dom"
 import { useState } from "react";
 
@@ -17,26 +19,14 @@ export const LoginPage = ({ setIsLoggedIn }) => {
             password: e.target.password.value,
         }
 
-        const request = {
-            method: "POST",
-            headers: { "content-type": "application/json" },
-            body: JSON.stringify(userLoginInfo)
-        }
-
-        const response = await fetch('http://localhost:8000/login', request)
-        const data = await response.json()
-        setStatusMessage(data)
-        if (response.ok === false) {
+        const data = await LoginRequest(userLoginInfo)
+        if (typeof (data) === "string") {
+            setStatusMessage(data)
             setIsSuccess(false)
         } else {
             setIsSuccess(true)
             setTimeout(() => {
-                const sessionData = {
-                    accessToken: data.accessToken,
-                    id: data.user.id,
-                    name: data.user.name
-                }
-                sessionStorage.setItem('CodebookAuth', JSON.stringify(sessionData))
+                SetSessionStorage(data)
                 setIsLoggedIn(true)
                 navigate('/products')
             }, 1000);

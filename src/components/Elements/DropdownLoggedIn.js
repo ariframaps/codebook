@@ -1,10 +1,11 @@
 import { NavLink } from "react-router-dom"
+import { LogOut } from "../../services/AuthService";
 
 export const DropdownLoggedIn = ({ setIsLoggedIn }) => {
   const name = JSON.parse(sessionStorage.getItem('CodebookAuth')).name
 
   function handleSignout() {
-    sessionStorage.removeItem('CodebookAuth');
+    LogOut()
     setIsLoggedIn(false);
   }
   return (
