@@ -28,10 +28,10 @@ export const ProductListPage = () => {
     }, [searchTerm])
 
     return (
-        <main>
+        <main className="dark:bg-gray-900">
             {showFilter && (<Filter setShowFilter={setShowFilter} />)}
-            <div className=" max-w-screen-xl mx-auto mt-20 p-4">
-                <div className="flex justify-between my-6 text-2xl">
+            <div className=" max-w-screen-xl mx-auto mt-16 p-4">
+                <div className="flex justify-between items-center my-6 text-2xl dark:text-white">
                     <span>All eBooks({productsList ? productsList.length : '0'})</span>
                     {searchTerm && <span>Search result for '{searchTerm}'</span>}
                     <button onClick={() => setShowFilter(!showFilter)} className="hover:bg-slate-200 p-3 rounded-md" >Filter <i className="bi bi-sliders2 p-1"></i></button>

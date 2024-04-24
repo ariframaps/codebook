@@ -19,8 +19,8 @@ export const DashboardPage = () => {
     }, [])
 
     return (
-        <main className="flex flex-col justify-start items-center mt-28">
-            <h2 className="text-3xl font-bold ">My Dashboard</h2>
+        <main className="flex flex-col px-5 justify-start items-center pt-28 dark:bg-gray-900">
+            <h2 className="text-3xl font-bold dark:text-white">My Dashboard</h2>
             {isLoading ? (
                 <div className="mt-10">
                     <Loading />

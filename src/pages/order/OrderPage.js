@@ -6,7 +6,7 @@ export const OrderPage = () => {
     const { state } = useLocation() // get the state from the checkout
 
     return (
-        <main>
+        <main className="dark:bg-gray-900">
             {state.status ? <OrderSuccess user={state.user} /> : <OrderFail />}
         </main >
     )

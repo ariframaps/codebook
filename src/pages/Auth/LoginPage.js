@@ -37,7 +37,7 @@ export const LoginPage = () => {
 
     return (
         <main className="bg-gray-50 dark:bg-gray-900 flex items-center">
-            <section className="w-screen">
+            <section className="w-screen px-5">
                 <div className="mx-auto max-w-screen-xl">
                     <div>
                         <div className="w-full mx-auto lg:max-w-xl p-6 space-y-8 sm:p-8 bg-white rounded-lg shadow-xl dark:bg-gray-800">
