@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 
 export const OrderFail = () => {
     return (
-        <div className="my-20 overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-modal md:h-full">
+        <div className="my-40 overflow-y-auto overflow-x-hidden justify-center items-center w-full md:inset-0 h-modal md:h-full">
             <div className="max-w-screen-md mx-auto relative p-4 w-full h-full md:h-auto">
                 {/* <!-- Modal content --> */}
                 <div className="relative p-4 text-center bg-white rounded-lg shadow-lg border dark:bg-gray-800 sm:p-7">

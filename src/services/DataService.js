@@ -24,7 +24,18 @@ export const GetUser = async (sessionData) => {
     return data
 }
 
-export const PostOrder = async (userOrder, sessionData) => {
+export const PostOrder = async (cartList, totalPrice, user, sessionData) => {
+    // storing user order from cart
+    const userOrder = {
+        cartList: cartList,
+        amount_paid: totalPrice,
+        quantity: cartList.length,
+        user: {
+            name: user.name,
+            email: user.email,
+            id: user.id
+        },
+    }
     await fetch(`${process.env.REACT_APP_HOST}/660/orders`, {
         method: "POST",
         headers: {

@@ -25,7 +25,7 @@ export const ProductListPage = () => {
     return (
         <main>
             {showFilter && (<Filter setShowFilter={setShowFilter} />)}
-            <div className=" max-w-screen-xl mx-auto p-4">
+            <div className=" max-w-screen-xl mx-auto mt-20 p-4">
                 <div className="flex justify-between my-6 text-2xl">
                     <span>All eBooks({productsList ? productsList.length : '0'})</span>
                     {searchTerm && <span>Search result for '{searchTerm}'</span>}

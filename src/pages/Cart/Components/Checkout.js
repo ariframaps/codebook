@@ -24,25 +24,14 @@ export const Checkout = ({ setShowCheckout }) => {
         e.preventDefault();
 
         try {
-            // storing user order from cart
-            const userOrder = {
-                cartList: cartList,
-                amount_paid: totalPrice,
-                quantity: cartList.length,
-                user: {
-                    name: user.name,
-                    email: user.email,
-                    id: user.id
-                },
-            }
-            PostOrder(userOrder, sessionData) // post user order to database
+            PostOrder(cartList, totalPrice, user, sessionData) // post user order to database
             navigate('/order-status', { // navigate to order status page
                 state: {
                     status: true,
                     user: user
                 }
             })
-            clearCart();
+            // clearCart();
         } catch (err) {
             navigate('/order-status', {
                 state: {

@@ -9,7 +9,7 @@ export const CartPage = () => {
     const { cartList, totalPrice } = useCart() // useCart context
 
     return (
-        <main className="flex justify-center items-start mt-20">
+        <main className="flex justify-center items-start mt-40">
             <div className="w-full max-w-3xl p-4 bg-white border border-gray-200 rounded-lg shadow sm:p-8 dark:bg-gray-800 dark:border-gray-700">
                 <div className="flex items-center justify-between mb-4">
                     <h5 className="text-xl font-bold leading-none text-gray-900 dark:text-white">Cart ({cartList.length})</h5>

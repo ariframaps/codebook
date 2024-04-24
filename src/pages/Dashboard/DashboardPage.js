@@ -15,7 +15,7 @@ export const DashboardPage = () => {
     }, [])
 
     return (
-        <main className="flex flex-col justify-start items-center mt-20">
+        <main className="flex flex-col justify-start items-center mt-28">
             <h2 className="text-3xl font-bold ">My Dashboard</h2>
             {orderList.length ? (
                 orderList.map(order => (
