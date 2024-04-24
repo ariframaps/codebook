@@ -17,7 +17,7 @@ export const AuthProvider = ({ children }) => {
         setTimeout(() => {
             setLoggedOut()
             alert('log out bro')
-        }, 5000);
+        }, 3600000);
 
         dispatch({
             type: 'LOGGED_IN',

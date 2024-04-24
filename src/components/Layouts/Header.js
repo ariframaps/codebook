@@ -9,21 +9,17 @@ import { useCart } from '../../context/CartContext'
 import { useAuth } from '../../context/AuthContext'
 
 export const Header = ({ showDropdown, setShowDropdown }) => {
-    const { isLoggedIn } = useAuth()
-
-    // cartlist length
-    const cartLength = useCart().cartList.length
+    const { isLoggedIn } = useAuth() // using auth context
+    const cartLength = useCart().cartList.length // cartlist length
+    const [showMenu, setShowMenu] = useState(false) // show dropdown (when on mobile)
 
     // darkmode
     const localStorageTheme = JSON.parse(localStorage.getItem('darkMode'))
     const [darkMode, setDarkMode] = useState(localStorageTheme != null ? localStorageTheme : true)
 
-    // search input value
+    // search input
     const [searchVal, setSearchVal] = useState('')
     const navigate = useNavigate()
-
-    //dropdown
-    const [showMenu, setShowMenu] = useState(false)
 
     // navlink active styles
     const classActive = 'block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-blue-700 md:p-0 md:dark:text-blue-500';
@@ -31,12 +27,7 @@ export const Header = ({ showDropdown, setShowDropdown }) => {
 
     useEffect(() => {
         localStorage.setItem('darkMode', JSON.stringify(darkMode));
-
-        if (darkMode) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark')
-        }
+        darkMode ? document.documentElement.classList.add('dark') : document.documentElement.classList.remove('dark');
     }, [darkMode])
 
     function handleSubmit(e) {

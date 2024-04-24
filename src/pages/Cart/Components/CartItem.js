@@ -2,10 +2,8 @@ import { useNavigate } from "react-router-dom"
 import { useCart } from "../../../context/CartContext"
 
 export const CartItem = ({ item }) => {
-    const navigate = useNavigate()
-
-    // useCart dispatch function
-    const { removeFromCart } = useCart()
+    const navigate = useNavigate() // useNavigate
+    const { removeFromCart } = useCart() // useCart function
 
     return (
         <li className="py-3 px-3 sm:py-4 bg-slate-100 dark:bg-gray-700">

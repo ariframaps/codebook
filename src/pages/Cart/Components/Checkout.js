@@ -9,13 +9,13 @@ export const Checkout = ({ setShowCheckout }) => {
     const navigate = useNavigate()
     const { cartList, totalPrice, clearCart } = useCart()
 
-    const sessionData = GetSessionStorage();
+    const sessionData = GetSessionStorage(); // get user login information
     const [user, setUser] = useState({});
 
     useEffect(() => {
         const fetchUserData = async () => {
-            const data = await GetUser(sessionData)
-            setUser(data)
+            const data = await GetUser(sessionData) // get user information
+            setUser(data) // set user
         }
         fetchUserData()
     }, [sessionData])
@@ -24,6 +24,7 @@ export const Checkout = ({ setShowCheckout }) => {
         e.preventDefault();
 
         try {
+            // storing user order from cart
             const userOrder = {
                 cartList: cartList,
                 amount_paid: totalPrice,
@@ -34,9 +35,8 @@ export const Checkout = ({ setShowCheckout }) => {
                     id: user.id
                 },
             }
-            PostOrder(userOrder, sessionData)
-
-            navigate('/order-status', {
+            PostOrder(userOrder, sessionData) // post user order to database
+            navigate('/order-status', { // navigate to order status page
                 state: {
                     status: true,
                     user: user

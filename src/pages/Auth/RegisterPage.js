@@ -4,15 +4,12 @@ import { RegisterRequest } from "../../services/AuthService";
 import { useAuth } from "../../context/AuthContext";
 
 export const RegisterPage = () => {
-    // auth reducer
+    const navigate = useNavigate()
     const { setLoggedIn } = useAuth()
 
     // response status
     const [statusMessage, setStatusMessage] = useState();
     const [isSuccess, setIsSuccess] = useState();
-
-    // navigate
-    const navigate = useNavigate()
 
     async function handleRegister(e) {
         e.preventDefault();
@@ -23,16 +20,14 @@ export const RegisterPage = () => {
             name: e.target.name.value,
         }
 
-        const data = await RegisterRequest(userRegisterInfo)
+        const data = await RegisterRequest(userRegisterInfo) // register request
+        setStatusMessage(data)
         if (typeof (data) === "string") {
-            setStatusMessage(data)
             setIsSuccess(false)
         } else {
             setIsSuccess(true)
-            setTimeout(() => {
-                setLoggedIn(data)
-                navigate('/products')
-            }, 2000);
+            setLoggedIn(data)
+            navigate('/products')
         }
     }
 

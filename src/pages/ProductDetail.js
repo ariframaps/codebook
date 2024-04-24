@@ -5,17 +5,18 @@ import { useCart } from "../context/CartContext"
 import { GetProductDetail } from "../services/ProductService"
 
 export const ProductDetail = () => {
-    const { id } = useParams()
-    const [product, setProduct] = useState()
+    const { id } = useParams() // get product id from  url
+    const [product, setProduct] = useState() // store product
+    const { cartList, addToCart, removeFromCart } = useCart() // cart context and reducer functions
 
-    // is product in cart list check
-    const { cartList, addToCart, removeFromCart } = useCart()
-    const [isInCart, setIsInCart] = useState(false)
+    const [isInCart, setIsInCart] = useState(false) // is product in cart list check
 
     useEffect(() => {
         const fetchProduct = async () => {
+            // storing product
             const result = await GetProductDetail(id)
             setProduct(result[0])
+            // check if product is already in cart or not
             const find = cartList.find(cartItem => cartItem.id === result[0].id)
             setIsInCart(find)
         }

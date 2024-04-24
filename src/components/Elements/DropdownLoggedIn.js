@@ -3,8 +3,8 @@ import { GetSessionStorage } from "../../services/DataService";
 import { useAuth } from "../../context/AuthContext";
 
 export const DropdownLoggedIn = () => {
-  const { setLoggedOut } = useAuth()
-  const name = GetSessionStorage().name
+  const { setLoggedOut } = useAuth() // use reducer from auth context
+  const name = GetSessionStorage().name // get usename from session storage
 
   return (
     <div id="dropdownNavbar" className={`absolute right-0 mt-3 z-10 font-normal bg-white divide-y divide-gray-100 rounded-lg shadow w-44 dark:bg-gray-700 dark:divide-gray-600`}>

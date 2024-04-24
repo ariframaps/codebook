@@ -4,34 +4,29 @@ import { useState } from "react";
 import { useAuth } from "../../context/AuthContext";
 
 export const LoginPage = () => {
-    // auth reducer
-    const { setLoggedIn } = useAuth()
+    const navigate = useNavigate() // useNavigate
+    const { setLoggedIn } = useAuth() // auth reducer
 
     // response status
-    const [statusMessage, setStatusMessage] = useState();
-    const [isSuccess, setIsSuccess] = useState();
-
-    // navigate
-    const navigate = useNavigate()
+    const [statusMessage, setStatusMessage] = useState(); // response status message
+    const [isSuccess, setIsSuccess] = useState(); // response is success or not?
 
     async function handleLogin(e) {
         e.preventDefault();
-
+        // storing user login input
         const userLoginInfo = {
             email: e.target.email.value,
             password: e.target.password.value,
         }
 
-        const data = await LoginRequest(userLoginInfo)
-        if (typeof (data) === "string") {
-            setStatusMessage(data)
+        const data = await LoginRequest(userLoginInfo) // login request
+        if (typeof (data) === "string") { // if string, then it is returning error message string
+            setStatusMessage(data) // set response status message
             setIsSuccess(false)
         } else {
             setIsSuccess(true)
-            setTimeout(() => {
-                setLoggedIn(data)
-                navigate('/products')
-            }, 1000);
+            setLoggedIn(data) // logging in user
+            navigate('/products') // navigating to products page
         }
     }
 

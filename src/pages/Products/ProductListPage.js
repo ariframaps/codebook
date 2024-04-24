@@ -6,15 +6,15 @@ import { useFilter } from "../../context/filterContext"
 import { GetProducts } from "../../services/ProductService"
 
 export const ProductListPage = () => {
-    const [showFilter, setShowFilter] = useState(false)
-    const search = useLocation().search;
-    const searchTerm = new URLSearchParams(search).get("q");
+    const [showFilter, setShowFilter] = useState(false) // filter bar show
+    const search = useLocation().search; // use location for search value
+    const searchTerm = new URLSearchParams(search).get("q"); // getting search value from URL after submitting search input
     const { productsList, initialProductsList } = useFilter()
 
     useEffect(() => {
         const fetchProducts = async () => {
-            let result = await GetProducts()
-            if (searchTerm) {
+            let result = await GetProducts() // get products list
+            if (searchTerm) { // if there is a search term then filter it
                 result = await result.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
             }
             initialProductsList(result)

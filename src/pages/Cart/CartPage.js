@@ -5,8 +5,8 @@ import { useState } from "react"
 import { useCart } from "../../context/CartContext"
 
 export const CartPage = () => {
-    const [showCheckout, setShowCheckout] = useState(false)
-    const { cartList, totalPrice } = useCart()
+    const [showCheckout, setShowCheckout] = useState(false) // set show checkout modal
+    const { cartList, totalPrice } = useCart() // useCart context
 
     return (
         <main className="flex justify-center items-start mt-20">
