@@ -25,11 +25,18 @@ export const GetUser = async (sessionData) => {
 }
 
 export const PostOrder = async (cartList, totalPrice, user, sessionData) => {
+    // create current date
+    const currentDate = new Date();
+    const date = currentDate.getDate();
+    const month = currentDate.getMonth() + 1; // Perlu ditambah 1 karena bulan dimulai dari 0 (Januari)
+    const year = currentDate.getFullYear()
+
     // storing user order from cart
     const userOrder = {
         cartList: cartList,
         amount_paid: totalPrice,
         quantity: cartList.length,
+        date: `${date}/${month}/${year}`,
         user: {
             name: user.name,
             email: user.email,

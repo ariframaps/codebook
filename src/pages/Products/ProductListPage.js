@@ -18,9 +18,11 @@ export const ProductListPage = () => {
                 result = await result.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
             }
             initialProductsList(result)
+            console.log('makanan')
         }
         fetchProducts()
-    }, [searchTerm, initialProductsList])
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [searchTerm])
 
     return (
         <main>
