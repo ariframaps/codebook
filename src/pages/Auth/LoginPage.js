@@ -9,19 +9,24 @@ export const LoginPage = () => {
     const { setLoggedIn } = useAuth() // auth reducer
     const [isLoading, setIsLoading] = useState()
 
+    // input values
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [guest, setGuest] = useState(false)
+
     // response status
     const [statusMessage, setStatusMessage] = useState(); // response status message
     const [isSuccess, setIsSuccess] = useState(); // response is success or not?
 
     async function handleLogin(e) {
         e.preventDefault();
-        // storing user login input
-        const userLoginInfo = {
-            email: e.target.email.value,
-            password: e.target.password.value,
-        }
 
+        // storing user login input
         setIsLoading(true);
+        const userLoginInfo = {
+            email: guest ? process.env.REACT_APP_LOGIN : e.target.email.value,
+            password: guest ? process.env.REACT_APP_PASSWORD : e.target.password.value,
+        }
         const data = await LoginRequest(userLoginInfo) // login request
         setIsLoading(false);
 
@@ -47,11 +52,11 @@ export const LoginPage = () => {
                             <form onSubmit={handleLogin} className="mt-8 space-y-6" action="#">
                                 <div>
                                     <label htmlFor="email" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your email</label>
-                                    <input type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required />
+                                    <input onChange={(e) => setEmail(e.target.value)} value={email || ''} type="email" name="email" id="email" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" />
                                 </div>
                                 <div>
                                     <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Your password</label>
-                                    <input type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required />
+                                    <input onChange={(e) => setPassword(e.target.value)} value={password || ''} type="password" name="password" id="password" placeholder="••••••••" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" />
                                 </div>
                                 {
                                     statusMessage && (
@@ -64,7 +69,10 @@ export const LoginPage = () => {
                                         </div>
                                     )
                                 }
-                                <button type="submit" className="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+                                <div className="flex flex-col items-start gap-2">
+                                    <button type="submit" className="w-full px-5 py-3 text-base font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 sm:w-auto dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login to your account</button>
+                                    <button type="submit" onClick={() => setGuest(true)} className="cursor-pointer w-full px-5 py-3 text-base font-medium text-center text-white bg-yellow-700 rounded-lg hover:bg-yellow-800 focus:ring-4 focus:ring-yellow-300 sm:w-auto dark:bg-yellow-600 dark:hover:bg-yellow-700 dark:focus:ring-yellow-800">Login as guest</button>
+                                </div>
                                 <div className="text-sm font-medium text-gray-900 dark:text-white">
                                     Not registered yet? <Link to='/register' className="text-blue-600 hover:underline dark:text-blue-500">Create account</Link>
                                 </div>
