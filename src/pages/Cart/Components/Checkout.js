@@ -29,7 +29,6 @@ export const Checkout = ({ setShowCheckout }) => {
                     user: user
                 }
             })
-            // clearCart();
         } catch (err) {
             navigate('/order-status', {
                 state: {
