@@ -57,7 +57,7 @@ export const LoginPage = () => {
                                     statusMessage && (
                                         <div className={`${isSuccess ? 'bg-green-100 border-green-200' : 'bg-red-100 border-red-200'} p-3 rounded-lg border `}>
                                             {isLoading ? (
-                                                <Loading />
+                                                <Loading small={true} />
                                             ) : (
                                                 <span>{isSuccess ? "Login success" : statusMessage} <i className={`ps-2 bi ${isSuccess ? "bi-check-circle-fill text-green-700" : "bi-exclamation-circle-fill text-red-700"}`}></i></span>
                                             )}
