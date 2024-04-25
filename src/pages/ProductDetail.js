@@ -43,7 +43,7 @@ export const ProductDetail = () => {
     }
 
     return (
-        <main className="mt-16 py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
+        <main className="mt-16 md:mt-20 py-8 bg-white md:py-16 dark:bg-gray-900 antialiased">
             {product && (
                 <div className="max-w-screen-xl px-4 mx-auto 2xl:px-0">
                     <div className="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
@@ -64,16 +64,16 @@ export const ProductDetail = () => {
                                     ${product.price}
                                 </p>
 
-                                <div className="flex items-center gap-4 mt-2 sm:mt-0">
+                                <div className="flex items-center gap-3 md:gap-4 mt-2 sm:mt-0">
                                     <Rating rating={product.rating} />
                                     <p
                                         className="text-sm font-medium leading-none text-gray-500 dark:text-gray-400"
                                     >
                                         ({product.rating}.0)
                                     </p>
-                                    {product.best_seller && (<span className="px-2 py-1 rounded border bg-orange-100 border-orange-300">Best seller</span>)}
-                                    {product.in_stock ? (<span className="px-2 py-1 rounded border bg-green-100 border-green-300">in stock</span>) : (<span className="px-2 py-1 rounded border bg-red-100 border-red-300">out of stock</span>)}
-                                    <span className="px-2 py-1 rounded border bg-blue-100 border-blue-300">{product.size} MB</span>
+                                    {product.best_seller && (<span className="px-2 py-1 rounded border bg-orange-100 border-orange-300 text-xs md:ext-base">Best seller</span>)}
+                                    {product.in_stock ? (<span className="px-2 py-1 rounded border bg-green-100 border-green-300 text-xs md:ext-base">in stock</span>) : (<span className="px-2 py-1 rounded border bg-red-100 border-red-300">out of stock</span>)}
+                                    <span className="px-2 py-1 rounded border bg-blue-100 border-blue-300 text-xs md:ext-base">{product.size} MB</span>
                                 </div>
                             </div>
 
