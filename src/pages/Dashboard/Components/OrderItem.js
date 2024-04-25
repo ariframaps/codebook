@@ -4,10 +4,10 @@ export const OrderItem = ({ item }) => {
             <div className="flex">
                 <div className='flex items-center flex-1 cursor-pointer'>
                     <div className="flex-shrink-0">
-                        <img className="w-12 h-12" src={item.poster} alt="Neil" />
+                        <img className="w-10 md:w-12 h-10 md:h-12" src={item.poster} alt="Neil" />
                     </div>
                     <div className="flex-1 min-w-0 ms-4">
-                        <p className="text-lg font-medium text-gray-900 truncate dark:text-white">
+                        <p className="truncate text-md md:text-lg font-medium text-gray-900 truncate dark:text-white">
                             {item.name}
                         </p>
                     </div>

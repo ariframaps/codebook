@@ -20,7 +20,6 @@ export const ProductListPage = () => {
                 result = await result.filter(product => product.name.toLowerCase().includes(searchTerm.toLowerCase()));
             }
             initialProductsList(result)
-            console.log('makanan')
         }
         fetchProducts()
         setIsLoading(false);
@@ -31,10 +30,10 @@ export const ProductListPage = () => {
         <main className="dark:bg-gray-900">
             {showFilter && (<Filter setShowFilter={setShowFilter} />)}
             <div className=" max-w-screen-xl mx-auto mt-16 p-4">
-                <div className="flex justify-between items-center my-6 text-2xl dark:text-white">
-                    <span>All eBooks({productsList ? productsList.length : '0'})</span>
+                <div className="flex justify-between items-center my-6 text-lg md:text-2xl dark:text-white">
+                    <span className="hidden md:block ">All eBooks({productsList ? productsList.length : '0'})</span>
                     {searchTerm && <span>Search result for '{searchTerm}'</span>}
-                    <button onClick={() => setShowFilter(!showFilter)} className="hover:bg-slate-200 p-3 rounded-md" >Filter <i className="bi bi-sliders2 p-1"></i></button>
+                    <button onClick={() => setShowFilter(!showFilter)} className="hover:bg-slate-300 hover:text-black p-3 rounded-md" >Filter <i className="bi bi-sliders2 p-1"></i></button>
                 </div>
                 {isLoading ? (
                     <Loading />

@@ -12,6 +12,9 @@ module.exports = {
         'half': '50rem',
         'section': '45rem',
         'small': '30rem'
+      },
+      maxWidth: {
+        '60s': '70%'
       }
     },
     fontFamily: {

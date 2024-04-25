@@ -3,6 +3,7 @@ import { useCart } from "../../context/CartContext"
 import { CartItem } from "./Components/CartItem"
 import { EmptyCart } from "./Components/EmptyCart"
 import { Checkout } from "./Components/Checkout"
+import { Link } from "react-router-dom"
 
 export const CartPage = () => {
     const [showCheckout, setShowCheckout] = useState(false) // set show checkout modal
@@ -26,9 +27,13 @@ export const CartPage = () => {
                         </ul>
 
                         {/* <!-- Modal toggle --> */}
-                        <button onClick={() => setShowCheckout(!showCheckout)} data-modal-target="authentication-modal" data-modal-toggle="authentication-modal" className="w-full mt-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
+                        <button onClick={() => setShowCheckout(!showCheckout)} data-modal-target="authentication-modal" className="w-full mt-7 md:mt-10 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
                             Checkout
                         </button>
+                        <Link to='/products' className="w-full mt-2 block text-black hover:bg-blue-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center border border-blue-600 dark:text-white dark:hover:bg-blue-600 dark:focus:ring-blue-800" type="button">
+                            Add more!
+                        </Link>
+
                         {showCheckout && <Checkout setShowCheckout={setShowCheckout} />}
                     </div>
                 ) : (
