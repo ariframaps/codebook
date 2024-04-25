@@ -67,7 +67,7 @@ export const ProductDetail = () => {
                                 <div className="flex items-center gap-3 md:gap-4 mt-2 sm:mt-0">
                                     <Rating rating={product.rating} />
                                     <p
-                                        className="text-sm font-medium leading-none text-gray-500 dark:text-gray-400"
+                                        className="hidden md:block text-sm font-medium leading-none text-gray-500 dark:text-gray-400"
                                     >
                                         ({product.rating}.0)
                                     </p>
