@@ -1,8 +1,8 @@
-import { Link, useNavigate } from "react-router-dom"
-import { Rating } from "./Rating"
-import { useCart } from "../../context/CartContext"
 import { useEffect, useState } from "react"
+import { Link, useNavigate } from "react-router-dom"
 import { useAuth } from "../../context/AuthContext"
+import { useCart } from "../../context/CartContext"
+import { Rating } from "./Rating"
 
 export const ProductCard = ({ product }) => {
     const { cartList, addToCart, removeFromCart } = useCart() // cart reducer

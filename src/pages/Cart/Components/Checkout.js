@@ -1,9 +1,7 @@
 import { useEffect, useState } from "react"
-import { useCart } from "../../../context/CartContext"
 import { useNavigate } from "react-router-dom"
-import { GetSessionStorage } from "../../../services/DataService"
-import { GetUser } from "../../../services/DataService"
-import { PostOrder } from "../../../services/DataService"
+import { useCart } from "../../../context/CartContext"
+import { GetSessionStorage, GetUser, PostOrder } from "../../../services/DataService"
 
 export const Checkout = ({ setShowCheckout }) => {
     const navigate = useNavigate()

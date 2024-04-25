@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
+import { GetOrder } from "../../services/DataService"
 import { DashBoardEmpty } from "./Components/DashBoardEmpty"
 import { OrderCard } from "./Components/OrderCard"
-import { GetOrder } from "../../services/DataService"
 import { Loading } from "../../components"
 
 export const DashboardPage = () => {

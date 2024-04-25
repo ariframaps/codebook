@@ -1,8 +1,8 @@
+import { useState } from "react"
+import { useCart } from "../../context/CartContext"
 import { CartItem } from "./Components/CartItem"
 import { EmptyCart } from "./Components/EmptyCart"
 import { Checkout } from "./Components/Checkout"
-import { useState } from "react"
-import { useCart } from "../../context/CartContext"
 
 export const CartPage = () => {
     const [showCheckout, setShowCheckout] = useState(false) // set show checkout modal
