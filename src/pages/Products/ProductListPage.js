@@ -13,7 +13,14 @@ export const ProductListPage = () => {
     const [isLoading, setIsLoading] = useState()
 
     useEffect(() => {
-        setIsLoading(true);
+        if (searchTerm) {
+            setIsLoading(false);
+            return;
+        }
+        productsList.length ? setIsLoading(false) : setIsLoading(true);
+    }, [productsList, searchTerm])
+
+    useEffect(() => {
         const fetchProducts = async () => {
             let result = await GetProducts() // get products list
             if (searchTerm) { // if there is a search term then filter it
@@ -22,7 +29,6 @@ export const ProductListPage = () => {
             initialProductsList(result)
         }
         fetchProducts()
-        setIsLoading(false);
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchTerm])
 

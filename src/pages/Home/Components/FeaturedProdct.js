@@ -9,13 +9,15 @@ export const FeaturedProdct = () => {
     const [isLoading, setIsLoading] = useState()
 
     useEffect(() => {
-        setIsLoading(true);
+        products.length ? setIsLoading(false) : setIsLoading(true);
+    }, [products])
+
+    useEffect(() => {
         const fetchProducts = async () => {
             const result = await GetFeaturedProducts()
             setProducts(result)
         }
         fetchProducts()
-        setIsLoading(false);
     }, [])
 
     return (
