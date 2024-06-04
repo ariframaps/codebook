@@ -5,7 +5,7 @@ import { GetSessionStorage, GetUser, PostOrder } from "../../../services/DataSer
 
 export const Checkout = ({ setShowCheckout }) => {
     const navigate = useNavigate()
-    const { cartList, totalPrice, clearCart } = useCart()
+    const { cartList, totalPrice } = useCart()
 
     const sessionData = GetSessionStorage(); // get user login information
     const [user, setUser] = useState({});

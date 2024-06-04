@@ -22,18 +22,6 @@ export const ProductCard = ({ product }) => {
         red: 'bg-red-700 hover:bg-red-800 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800'
     }
 
-    // product thumbnail styles
-    const imgStyle = (url) => {
-        const style = {
-            width: '384px',
-            height: '250px',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center',
-            background: `url('${url}')`
-        }
-        return style;
-    }
-
     function handleButton() {
         if (!isLoggedIn) {
             navigate('/login');
@@ -46,10 +34,12 @@ export const ProductCard = ({ product }) => {
     return (
         <div className="w-full flex flex-col justify-between max-w-sm relative bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
             {product.best_seller ? <span className="absolute top-4 left-4 bg-orange-500 px-3 py-1.5 rounded text-white">Best seller</span> : ''}
-            <div>
-                <Link to={`/products/${product.id}`}>
-                    <div style={imgStyle(product.poster)} className="rounded-t-lg"></div>
-                </Link>
+            <div className="rounded-t-lg overflow-hidden">
+                <div className="max-h-[180px] lg:max-h-[250px] overflow-hidden" >
+                    <Link to={`/products/${product.id}`}>
+                        <img src={product.poster} alt="product" />
+                    </Link>
+                </div>
                 <Link to={`/products/${product.id}`} className="px-5 mt-3 block">
                     <h5 className="text-xl font-semibold tracking-tight text-gray-900 dark:text-white">{product.name}</h5>
                 </Link>
@@ -67,7 +57,7 @@ export const ProductCard = ({ product }) => {
                     </button>
                 </div>
             </div>
-        </div>
+        </div >
 
     )
 }
